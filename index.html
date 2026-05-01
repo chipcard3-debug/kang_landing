@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강종근 | AI 컨설턴트 · 상상우리</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ── 헤더 ── */
+    .header {
+      background: #1F3864;
+      color: #fff;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+
+    .profile-img-wrap {
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.15);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .profile-placeholder {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .profile-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.6;
+      fill: #fff;
+    }
+
+    .nameplate {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+
+    .nameplate .name { font-size: 1.7rem; }
+    .nameplate .sep {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.7;
+      margin: 0 6px;
+    }
+    .nameplate .title { font-size: 1.25rem; font-weight: 400; }
+    .nameplate .company { font-size: 1.1rem; font-weight: 300; opacity: 0.85; }
+
+    .intro {
+      margin-top: 18px;
+      font-size: 0.93rem;
+      line-height: 1.75;
+      opacity: 0.9;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    /* ── 경력 섹션 ── */
+    .section {
+      padding: 28px 20px 8px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #1F3864;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding-left: 2px;
+    }
+
+    .career-card {
+      background: #fff;
+      border-radius: 10px;
+      border-left: 4px solid #1F3864;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    .career-period {
+      font-size: 0.78rem;
+      color: #1F3864;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .career-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 3px;
+    }
+
+    .career-company {
+      font-size: 0.88rem;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .career-summary {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.55;
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+    }
+
+    /* ── 연락처 버튼 ── */
+    .contact-section {
+      padding: 16px 20px 48px;
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: inherit;
+    }
+
+    .btn:active { opacity: 0.75; }
+
+    .btn-email {
+      background: #1F3864;
+      color: #fff;
+    }
+
+    .btn-phone {
+      background: #fff;
+      color: #1F3864;
+      border: 2px solid #1F3864;
+    }
+
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* 복사 완료 토스트 */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #333;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: 0.88rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      white-space: nowrap;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* 모바일 최적화 */
+    @media (max-width: 400px) {
+      .nameplate .name { font-size: 1.45rem; }
+      .nameplate .title { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더: 이름·직책·회사 + 자기소개 -->
+  <header class="header">
+    <div class="profile-img-wrap">
+      <img src="profile.JPG" alt="강종근 프로필 사진" class="profile-img">
+    </div>
+
+    <p class="nameplate">
+      <span class="name">강종근</span>
+      <span class="sep">|</span>
+      <span class="title">AI 컨설턴트</span>
+      <span class="sep">·</span>
+      <span class="company">상상우리</span>
+    </p>
+
+    <p class="intro">
+      금융 업계 30년 경력으로 은행·카드사의 영업, 마케팅, 경영관리 전반을 두루 경험하였습니다.<br>
+      VAN사 사외이사를 역임하며 결제 인프라 분야의 폭넓은 통찰을 갖추었고,<br>
+      현재는 금융·핀테크 기업의 AI 전략 수립과 현장 도입을 지원하는 AI 컨설턴트로 활동하고 있습니다.
+    </p>
+  </header>
+
+  <!-- 경력 카드 -->
+  <section class="section" aria-label="주요 경력">
+    <h2 class="section-title">주요 경력</h2>
+
+    <div class="career-card">
+      <p class="career-period">2026 – 현재</p>
+      <p class="career-role">AI 컨설턴트</p>
+      <p class="career-company">상상우리</p>
+      <p class="career-summary">금융·핀테크 기업 대상 AI 전략 수립 및 현장 도입 지원</p>
+    </div>
+
+    <div class="career-card">
+      <p class="career-period">2014 – 2019</p>
+      <p class="career-role">가맹점마케팅 부장</p>
+      <p class="career-company">하나카드</p>
+      <p class="career-summary">가맹점 마케팅 전략 기획 및 신규 제휴 확대 총괄</p>
+    </div>
+
+    <div class="career-card">
+      <p class="career-period">1990 – 2014</p>
+      <p class="career-role">영업추진·경영관리 부부장</p>
+      <p class="career-company">외환카드 · 외환은행</p>
+      <p class="career-summary">영업 추진·경영 관리 전략 수립 및 실행, 24년간 금융 현장 경력</p>
+    </div>
+  </section>
+
+  <!-- 연락처 버튼 -->
+  <div class="contact-section" aria-label="연락처">
+    <a class="btn btn-email" href="mailto:chipcard1@naver.com" aria-label="이메일 보내기">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+      이메일 보내기
+    </a>
+
+    <button class="btn btn-phone" onclick="copyPhone()" aria-label="전화번호 복사">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+      </svg>
+      전화번호 복사  <span style="font-weight:400; opacity:0.7; font-size:0.88rem;">010-7744-0046</span>
+    </button>
+  </div>
+
+  <!-- 복사 완료 토스트 -->
+  <div class="toast" id="toast" role="status" aria-live="polite">전화번호가 복사되었습니다</div>
+
+  <script>
+    function copyPhone() {
+      var num = '01077440046';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(num).then(showToast);
+      } else {
+        var el = document.createElement('textarea');
+        el.value = num;
+        el.style.position = 'fixed';
+        el.style.top = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast();
+      }
+    }
+
+    function showToast() {
+      var t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 2200);
+    }
+  </script>
+
+</body>
+</html>
